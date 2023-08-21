@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Products from "./components/Products";
 import Header from "./components/Header";
 import Cart from "./components/Cart";
+import Hero from "./components/Hero";
 function App() {
   const productsArr = [
     {
@@ -84,6 +85,7 @@ function App() {
       {isShown && (
         <Cart items={cartItems} onRemove={removeHandler} onShow={showHandler} />
       )}
+      <Hero />
       <Products items={productsArr} />
     </>
   );

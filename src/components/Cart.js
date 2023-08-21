@@ -4,7 +4,7 @@ const Cart = (props) => {
   return (
     <>
       <Card
-        className="col-5 position-absolute top-3 end-0 p-3"
+        className="col-5 position-absolute top-3 end-0 p-2 mt-2"
         style={{ zIndex: 100 }}
       >
         <Button
@@ -18,28 +18,28 @@ const Cart = (props) => {
         <Card.Body>
           <Container>
             <h2 className="text-center">CART</h2>
-            <Table >
+            <Table>
               <thead>
                 <tr>
-                  <th >ITEM</th>
+                  <th>ITEM</th>
                   <th>PRICE</th>
-                  <th>QUANTITY</th>
+                  <th className="text-center">QUANTITY</th>
                 </tr>
               </thead>
               <tbody>
                 {props.items.map((item) => (
                   <tr>
                     <td>
-                        <div className="d-flex align-items-center ">
-                      <img
-                        src={item.imageUrl}
-                        style={{ height: "100px" }}
-                      ></img>
-                      <p className="m-2">{item.title}</p>
+                      <div className="d-flex align-items-center ">
+                        <img
+                          src={item.imageUrl}
+                          style={{ height: "100px" }}
+                        ></img>
+                        <p className="m-2">{item.title}</p>
                       </div>
                     </td>
                     <td className="align-middle text-center">
-                      <p >{item.price}</p>
+                      <p>{item.price}</p>
                     </td>
                     <td className="align-middle ">
                       <div className="d-flex align-items-center">
@@ -50,7 +50,6 @@ const Cart = (props) => {
                         <Button
                           variant="warning"
                           onClick={() => props.onRemove(item)}
-                        
                         >
                           remove
                         </Button>
