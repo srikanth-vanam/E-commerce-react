@@ -16,7 +16,11 @@ const Header = (props) => {
       <Container>
         <Navbar.Brand className="text-white">E-COMMERCE</Navbar.Brand>
         <Nav.Item className="d-flex justify-content-between">
-          <Nav.Link className="text-white">HOME</Nav.Link>
+          <Nav.Link>
+            <NavLink to="/home" className="text-white text-decoration-none">
+              HOME
+            </NavLink>
+          </Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link className="text-white">STORE</Nav.Link>
@@ -28,15 +32,17 @@ const Header = (props) => {
             </NavLink>
           </Nav.Link>
         </Nav.Item>
-        {!props.onHide && <Nav.Item className="d-flex">
-          <Nav.Link
-            className="ml-auto text-white border border-primary rounded-2 p-1"
-            onClick={() => props.onShow(false)}
-          >
-            Cart
-          </Nav.Link>
-          <p className="text-white fw-bold m-1">{cartItemsCount}</p>
-        </Nav.Item>}
+        {!props.onHide && (
+          <Nav.Item className="d-flex">
+            <Nav.Link
+              className="ml-auto text-white border border-primary rounded-2 p-1"
+              onClick={() => props.onShow(false)}
+            >
+              Cart
+            </Nav.Link>
+            <p className="text-white fw-bold m-1">{cartItemsCount}</p>
+          </Nav.Item>
+        )}
       </Container>
     </Navbar>
   );
