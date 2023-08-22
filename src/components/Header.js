@@ -22,7 +22,7 @@ const Header = (props) => {
               <Nav.Link className="text-white">STORE</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link className="text-white">ABOUT US</Nav.Link>
+              <Nav.Link className="text-white" href="/aboutUs">ABOUT US</Nav.Link>
             </Nav.Item>
             <Nav.Item className="d-flex">
               <Nav.Link

@@ -10,8 +10,8 @@ const Cart = (props) => {
   return (
     <>
       <Card
-        className="col-5 position-absolute top-3 end-0 p-2 mt-2"
-        style={{ zIndex: 100 }}
+        className="col-5 position-fixed top-3 end-0 p-2 mt-2"
+        style={{ zIndex: 100,overflowY:'scroll',height:'87vh'}}
       >
         <Button
           onClick={() => props.onShow(true)}
