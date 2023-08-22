@@ -1,6 +1,12 @@
+import { useContext } from "react";
 import { Button, Card, Container, FormControl, Table } from "react-bootstrap";
+import CartContext from "./CartContext";
 
 const Cart = (props) => {
+  const ctx = useContext(CartContext);
+  const removeItem = (item) => {
+    ctx.removeItems(item);
+  };
   return (
     <>
       <Card
@@ -27,12 +33,13 @@ const Cart = (props) => {
                 </tr>
               </thead>
               <tbody>
-                {props.items.map((item) => (
+                {ctx.cartItems.map((item) => (
                   <tr>
                     <td>
                       <div className="d-flex align-items-center ">
                         <img
                           src={item.imageUrl}
+                          alt="cartItem"
                           style={{ height: "100px" }}
                         ></img>
                         <p className="m-2">{item.title}</p>
@@ -49,7 +56,7 @@ const Cart = (props) => {
                         ></FormControl>
                         <Button
                           variant="warning"
-                          onClick={() => props.onRemove(item)}
+                          onClick={() => removeItem(item)}
                         >
                           remove
                         </Button>
