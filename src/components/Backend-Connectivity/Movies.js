@@ -11,21 +11,25 @@ const Movies = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch("https://swapi.py4e.com/api/films/");
+      const response = await fetch(
+        "https://react-httprequests-2c86d-default-rtdb.firebaseio.com/movies.json"
+      );
       if (!response.ok) {
         throw new Error("some error occured");
       }
       const data = await response.json();
-
-      console.log(data.results);
-      const newMovies = data.results.map((item) => {
-        return {
-          id: item.episode_id,
-          title: item.title,
-        };
-      });
-      setMovies(newMovies);
-      console.log(newMovies);
+      console.log(data);
+      let originalData = [];
+      // we get data as object from firebase so iterating over data-object.
+      for (const item in data) {
+        originalData.push({
+          id: item,
+          title: data[item].title,
+          text: data[item].text,
+          date: data[item].date,
+        });
+      }
+      setMovies(originalData);
     } catch (error) {
       setError(error.message);
     }
@@ -36,46 +40,80 @@ const Movies = () => {
     moviesHandler();
   }, [moviesHandler]);
   const [inputText, setInputText] = useState("");
-  const [inputTitle,setInputTitle]=useState("");
-  const [inputDate,setInputDate]=useState("");
+  const [inputTitle, setInputTitle] = useState("");
+  const [inputDate, setInputDate] = useState("");
   const textChangeHandler = (event) => {
     setInputText(event.target.value);
   };
-  const titleChangeHandler=(e)=>{
+  const titleChangeHandler = (e) => {
     setInputTitle(e.target.value);
-  }
-  const dateChangeHandler=(e)=>{
+  };
+  const dateChangeHandler = (e) => {
     setInputDate(e.target.value);
-  }
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    
     const movieFormData = {
       title: inputTitle,
       text: inputText,
       date: inputDate,
     };
-    console.log(movieFormData);
+    postMovieData(movieFormData);
+  };
+
+  const postMovieData = async (movie) => {
+    const response = await fetch(
+      "https://react-httprequests-2c86d-default-rtdb.firebaseio.com/movies.json",
+      {
+        method: "POST",
+        body: JSON.stringify(movie),
+      }
+    );
+    const data = await response.json();
+  };
+  const deleteMovieHandler = async (movieId) => {
+    try {
+      const response = await fetch(
+        `https://react-httprequests-2c86d-default-rtdb.firebaseio.com/movies/${movieId}.json`,
+        {
+          method: "PUT",
+          body: JSON.stringify({
+            title: "Dhruva movie changed",
+          }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("cannot delete");
+      }
+      console.log("updated successfully");
+      moviesHandler();
+    } catch (error) {
+      setError(error.message);
+    }
   };
   return (
     <>
-      <Form
-        className="m-auto mb-1"
-        style={{ width: "40rem", height: "20rem" }}
-      >
+      <Form className="m-auto mb-1" style={{ width: "40rem", height: "20rem" }}>
         <FormLabel>Title</FormLabel>
-        <FormControl id="title" value={inputTitle} onChange={titleChangeHandler}></FormControl>
+        <FormControl
+          value={inputTitle}
+          onChange={titleChangeHandler}
+        ></FormControl>
         <FormLabel>Text</FormLabel>
         <FormControl
-          id="text"
           onChange={textChangeHandler}
           className="h-25"
           value={inputText}
         ></FormControl>
         <FormLabel>Date</FormLabel>
-        <FormControl id="date" value={inputDate} onChange={dateChangeHandler}></FormControl>
-        <Button onClick={submitHandler} className="mt-3">Add movie</Button>
+        <FormControl
+          value={inputDate}
+          onChange={dateChangeHandler}
+        ></FormControl>
+        <Button onClick={submitHandler} className="mt-3">
+          Add movie
+        </Button>
       </Form>
       <Button className="d-block m-auto" onClick={moviesHandler}>
         Fetch Movies
@@ -84,10 +122,10 @@ const Movies = () => {
         className="bg-light "
         style={{ color: "red", width: "40rem", margin: "1rem auto" }}
       >
-        {!isLoading && <Displayer movies={movies} />}
-        {isLoading && (
-          <p style={{ color: "red" }}>Loading.... it is thek dfoef</p>
+        {!isLoading && (
+          <Displayer movies={movies} onDelete={deleteMovieHandler} />
         )}
+        {isLoading && <p style={{ color: "red" }}>Loading.... </p>}
         {!isLoading && movies.length === 0 && !error && (
           <p>No movies to Display</p>
         )}
