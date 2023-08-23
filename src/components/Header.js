@@ -23,7 +23,7 @@ const Header = (props) => {
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <NavLink to="/" className="text-white text-decoration-none">
+          <NavLink to="/starwars" className="text-white text-decoration-none">
             STORE
           </NavLink>
           <Nav.Link></Nav.Link>
