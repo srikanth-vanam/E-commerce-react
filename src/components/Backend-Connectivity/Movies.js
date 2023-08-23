@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Form, FormControl, FormLabel } from "react-bootstrap";
 import Displayer from "./Displayer";
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-    // using callbaack hook to memoize the function .
+  // using callbaack hook to memoize the function .
   const moviesHandler = useCallback(async () => {
     setIsLoading(true);
     setError(null);
@@ -30,15 +30,60 @@ const Movies = () => {
       setError(error.message);
     }
     setIsLoading(false);
-  },[]);
+  }, []);
   // we want to get data whenever this movieHandler changes so that'why it is included in [].
   useEffect(() => {
     moviesHandler();
   }, [moviesHandler]);
+  const [inputText, setInputText] = useState("");
+  const [inputTitle,setInputTitle]=useState("");
+  const [inputDate,setInputDate]=useState("");
+  const textChangeHandler = (event) => {
+    setInputText(event.target.value);
+  };
+  const titleChangeHandler=(e)=>{
+    setInputTitle(e.target.value);
+  }
+  const dateChangeHandler=(e)=>{
+    setInputDate(e.target.value);
+  }
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    
+    const movieFormData = {
+      title: inputTitle,
+      text: inputText,
+      date: inputDate,
+    };
+    console.log(movieFormData);
+  };
   return (
     <>
-      <Button onClick={moviesHandler}>Fetch Movies</Button>
-      <Card className="bg-light" style={{ height: "400px", color: "red" }}>
+      <Form
+        className="m-auto mb-1"
+        style={{ width: "40rem", height: "20rem" }}
+      >
+        <FormLabel>Title</FormLabel>
+        <FormControl id="title" value={inputTitle} onChange={titleChangeHandler}></FormControl>
+        <FormLabel>Text</FormLabel>
+        <FormControl
+          id="text"
+          onChange={textChangeHandler}
+          className="h-25"
+          value={inputText}
+        ></FormControl>
+        <FormLabel>Date</FormLabel>
+        <FormControl id="date" value={inputDate} onChange={dateChangeHandler}></FormControl>
+        <Button onClick={submitHandler} className="mt-3">Add movie</Button>
+      </Form>
+      <Button className="d-block m-auto" onClick={moviesHandler}>
+        Fetch Movies
+      </Button>
+      <Card
+        className="bg-light "
+        style={{ color: "red", width: "40rem", margin: "1rem auto" }}
+      >
         {!isLoading && <Displayer movies={movies} />}
         {isLoading && (
           <p style={{ color: "red" }}>Loading.... it is thek dfoef</p>

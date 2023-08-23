@@ -1,13 +1,15 @@
 const Displayer = (props) => {
   return (
     <>
-      {props.movies.map((item) => (
-        <>
-          <li style={{color:'black'}}>
-            <p>{item.id}, {item.title}</p>
+      <ul className="list-unstyled p-2">
+        {props.movies.map((item) => (
+          <li className="text-dark text-center" key={item.id}>
+            <p>
+              {item.id}, {item.title}
+            </p>
           </li>
-        </>
-      ))}
+        ))}
+      </ul>
     </>
   );
 };
