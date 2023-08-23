@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import Displayer from "./Displayer";
 
@@ -6,20 +6,13 @@ const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [retrying, setRetrying] = useState(false);
-  async function moviesHandler() {
+    // using callbaack hook to memoize the function .
+  const moviesHandler = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch("https://swapi.py4e.com/api/film/");
+      const response = await fetch("https://swapi.py4e.com/api/films/");
       if (!response.ok) {
-        if (!retrying) {
-          setInterval(() => {
-            fetch("https://swapi.py4e.com/api/film/").then((response) => {
-              console.log("response fetched");
-            });
-          }, 5000);
-        }
         throw new Error("some error occured");
       }
       const data = await response.json();
@@ -37,10 +30,11 @@ const Movies = () => {
       setError(error.message);
     }
     setIsLoading(false);
-  }
-  const retryHandler = () => {
-    setRetrying(true);
-  };
+  },[]);
+  // we want to get data whenever this movieHandler changes so that'why it is included in [].
+  useEffect(() => {
+    moviesHandler();
+  }, [moviesHandler]);
   return (
     <>
       <Button onClick={moviesHandler}>Fetch Movies</Button>
@@ -53,7 +47,6 @@ const Movies = () => {
           <p>No movies to Display</p>
         )}
         {!isLoading && error && <p>{error}</p>}
-        <Button onClick={retryHandler}>Cancel</Button>
       </Card>
     </>
   );
