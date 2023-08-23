@@ -70,7 +70,7 @@ const Movies = () => {
         body: JSON.stringify(movie),
       }
     );
-    const data = await response.json();
+    await response.json();
   };
   const deleteMovieHandler = async (movieId) => {
     try {

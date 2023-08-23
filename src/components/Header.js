@@ -35,6 +35,13 @@ const Header = (props) => {
             </NavLink>
           </Nav.Link>
         </Nav.Item>
+        <Nav.Item>
+          <Nav.Link>
+            <NavLink to="/contactUs" className="text-white text-decoration-none">
+              CONTACT US
+            </NavLink>
+          </Nav.Link>
+        </Nav.Item>
         {!props.onHide && (
           <Nav.Item className="d-flex">
             <Nav.Link
