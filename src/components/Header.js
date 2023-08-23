@@ -23,7 +23,10 @@ const Header = (props) => {
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link className="text-white">STORE</Nav.Link>
+          <NavLink to="/" className="text-white text-decoration-none">
+            STORE
+          </NavLink>
+          <Nav.Link></Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link>
