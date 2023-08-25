@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CartContext from "./CartContext";
 
 const CartProvider = (props) => {
   const [cartItem, setCartItem] = useState([]);
   const initialToken = localStorage.getItem("token");
+  const initialEmail=localStorage.getItem("email");
   const [tokenString, setTokenString] = useState(initialToken);
+  const [email,setEmail]=useState(initialEmail);
   const userLoggedIn = !!tokenString;
 
   const addItemHandler = (item) => {
@@ -38,6 +40,7 @@ const CartProvider = (props) => {
     console.log(tokenId);
     setTokenString(tokenId);
     localStorage.setItem("token", tokenId);
+    emailHandler();
   };
 
   const removeTokenHandler = () => {
@@ -45,6 +48,19 @@ const CartProvider = (props) => {
     setTokenString(null);
     localStorage.removeItem("token");
   };
+
+  const emailHandler=()=>{
+    const localEmail=localStorage.getItem('email');
+    setEmail(localEmail);
+  }
+
+  useEffect(()=>{
+    const localEmail=localStorage.getItem('email');
+    if(localEmail!==null){
+      console.log("inside the useEffect, setting email ");
+      setEmail(localEmail);
+    }
+  },[tokenString])
 
   const cartContext = {
     cartItems: cartItem,
@@ -55,6 +71,7 @@ const CartProvider = (props) => {
     isLoggedIn: userLoggedIn,
     addToken: addTokenHandler,
     removeToken: removeTokenHandler,
+    userEmail:email,
   };
 
   return (

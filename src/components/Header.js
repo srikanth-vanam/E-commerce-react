@@ -57,7 +57,8 @@ const Header = (props) => {
             >
               Cart
             </Nav.Link>
-            <p className="text-white fw-bold m-1">{cartItemsCount}</p>
+            {/* <p className="text-white fw-bold m-1">{cartItemsCount}</p> */}
+            <p className="text-white fw-bold m-1">{props.length}</p>
           </Nav.Item>
         )}
       </Container>

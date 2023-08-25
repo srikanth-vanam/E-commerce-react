@@ -44,6 +44,7 @@ const Login = () => {
         }
       })
       .then((data) => {
+        localStorage.setItem("email",obj.email);
         console.log(data);
         ctx.addToken(data.idToken);
         history.replace("/products");

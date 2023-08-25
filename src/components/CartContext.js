@@ -8,5 +8,6 @@ const CartContext = React.createContext({
   isLoggedIn:'false',
   addToken: (token) => {},
   removeToken: () => {},
+  userEmail:''
 });
 export default CartContext;
