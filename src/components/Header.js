@@ -37,6 +37,13 @@ const Header = (props) => {
         </Nav.Item>
         <Nav.Item>
           <Nav.Link>
+            <NavLink to="/login" className="text-white text-decoration-none">
+              Login 
+            </NavLink>
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link>
             <NavLink to="/contactUs" className="text-white text-decoration-none">
               CONTACT US
             </NavLink>

@@ -15,7 +15,7 @@ const Products = (props) => {
             <Card className="w-50 border-white m-3">
               <p className="text-center fw-bold">{item.title}</p>
               <Card.Body>
-                <Link to="/products/image1">
+                <Link to={`/products/${item.title}`}>
                   <CardImg src={item.imageUrl} />
                 </Link>
               </Card.Body>

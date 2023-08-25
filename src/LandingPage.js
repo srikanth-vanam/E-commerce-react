@@ -3,7 +3,7 @@ import Products from "./components/Products";
 import Header from "./components/Header";
 import Cart from "./components/Cart";
 import Hero from "./components/Hero";
-import CartProvider from "./components/CartProvider";
+// import CartProvider from "./components/CartProvider";
 import Footer from "./components/Footer";
 const LandingPage = () => {
   const productsArr = [
@@ -42,13 +42,13 @@ const LandingPage = () => {
   };
 
   return (
-    <CartProvider>
-      <Header onShow={showHandler} onHide={false}/>
+    <>
+      <Header onShow={showHandler} onHide={false} />
       {isShown && <Cart onShow={showHandler} />}
       <Hero />
       <Products items={productsArr} />
       <Footer />
-    </CartProvider>
+    </>
   );
 };
 

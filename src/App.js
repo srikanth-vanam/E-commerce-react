@@ -5,6 +5,7 @@ import Movies from "./components/Backend-Connectivity/Movies";
 import { Route, Switch } from "react-router-dom/cjs/react-router-dom";
 import Contact from "./components/Contact";
 import ProductDetail from "./components/ProductDetail";
+import Login from "./components/Login";
 function App() {
   return (
     <>
@@ -17,6 +18,9 @@ function App() {
         </Route>
         <Route path="/aboutUs">
           <AboutUs />
+        </Route>
+        <Route path="/login">
+          <Login />
         </Route>
         <Route path="/starwars">
           <Movies />
