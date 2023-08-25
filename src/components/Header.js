@@ -17,13 +17,13 @@ const Header = (props) => {
         <Navbar.Brand className="text-white">E-COMMERCE</Navbar.Brand>
         <Nav.Item className="d-flex justify-content-between">
           <Nav.Link>
-            <NavLink to="/home" className="text-white text-decoration-none">
+            <NavLink to="/" className="text-white text-decoration-none">
               HOME
             </NavLink>
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <NavLink to="/starwars" className="text-white text-decoration-none">
+          <NavLink to="/products" className="text-white text-decoration-none">
             STORE
           </NavLink>
           <Nav.Link></Nav.Link>

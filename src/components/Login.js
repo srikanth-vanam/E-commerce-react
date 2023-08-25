@@ -46,7 +46,7 @@ const Login = () => {
       .then((data) => {
         console.log(data);
         ctx.addToken(data.idToken);
-        history.replace("/");
+        history.replace("/products");
       })
       .catch((error) => {
         alert(error.message);
