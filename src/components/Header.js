@@ -4,11 +4,16 @@ import CartContext from "./CartContext";
 import { NavLink } from "react-router-dom";
 const Header = (props) => {
   const ctx = useContext(CartContext);
-  let cartItemsCount = 0;
-  if (ctx.cartItems.length !== 0) {
-    ctx.cartItems.forEach((element) => {
-      cartItemsCount += element.quantity;
-    });
+  // let cartItemsCount = 0;
+  // if (ctx.cartItems.length !== 0) {
+  //   ctx.cartItems.forEach((element) => {
+  //     cartItemsCount += element.quantity;
+  //   });
+  // }
+
+  const clickHandler=()=>{
+    props.onShow(false);
+    ctx.getDataFromCrud();
   }
 
   return (
@@ -53,12 +58,12 @@ const Header = (props) => {
           <Nav.Item className="d-flex">
             <Nav.Link
               className="ml-auto text-white border border-primary rounded-2 p-1"
-              onClick={() => props.onShow(false)}
+              onClick={clickHandler}
             >
               Cart
             </Nav.Link>
-            {/* <p className="text-white fw-bold m-1">{cartItemsCount}</p> */}
-            <p className="text-white fw-bold m-1">{props.length}</p>
+            {/* <p className="text-white fw-bold m-1">{ctx.cartItemsCount}</p> */}
+            <p className="text-white fw-bold m-1">{ctx.cartCount}</p>
           </Nav.Item>
         )}
       </Container>

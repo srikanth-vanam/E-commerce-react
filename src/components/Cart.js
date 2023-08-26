@@ -33,7 +33,7 @@ const Cart = (props) => {
                 </tr>
               </thead>
               <tbody>
-                {props.items.map((item) => (
+                {ctx.cartItems.map((item) => (
                   <tr>
                     <td>
                       <div className="d-flex align-items-center ">
